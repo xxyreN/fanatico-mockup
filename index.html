@@ -1,0 +1,1374 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fanático · Cafés La Mexicana · desde 1890</title>
+<meta name="description" content="Cafetería de especialidad en Chamberí, Madrid. Tostadores desde 1890.">
+<link rel="icon" type="image/png" href="assets/logo-hexagon.png">
+<link rel="apple-touch-icon" href="assets/logo-hexagon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400..900&family=Inter:wght@300..700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #141110;
+    --ink-soft: #2a241f;
+    --ink-line: rgba(244, 238, 225, 0.12);
+    --paper: #f4eee1;
+    --paper-bright: #faf6eb;
+    --paper-line: rgba(20, 17, 16, 0.12);
+    --yellow: #e9b93c;
+    --yellow-deep: #c2922d;
+    --hex-cream: #f9f0d6;
+    --colombia: #4b3d88;
+    --etiopia: #8f2d5e;
+    --kenia: #4f6b2f;
+    --papua: #1a5854;
+    --font-display: 'Archivo', Helvetica, Arial, sans-serif;
+    --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font-body);
+    font-size: 17px;
+    line-height: 1.6;
+    color: var(--ink);
+    background: var(--paper);
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  img, video { display: block; max-width: 100%; height: auto; }
+
+  a { color: inherit; text-decoration: none; }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    font-weight: 800;
+    letter-spacing: -0.035em;
+    line-height: 0.96;
+    text-transform: none;
+  }
+
+  h1 {
+    font-size: clamp(3.8rem, 10vw, 11rem);
+    font-weight: 900;
+    letter-spacing: -0.045em;
+    line-height: 0.92;
+  }
+
+  h2 {
+    font-size: clamp(2.4rem, 6vw, 5.5rem);
+    font-weight: 800;
+    letter-spacing: -0.035em;
+    line-height: 0.95;
+  }
+
+  h3 {
+    font-size: clamp(1.6rem, 2.4vw, 2.4rem);
+    font-weight: 700;
+  }
+
+  p { max-width: 56ch; }
+
+  /* ==================== NAV ==================== */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 18px 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(to bottom, rgba(20,17,16,0.55), rgba(20,17,16,0));
+    transition: background 0.4s ease;
+  }
+  nav.scrolled {
+    background: rgba(20,17,16,0.92);
+    backdrop-filter: blur(8px);
+  }
+  nav a { color: var(--paper); }
+  .nav-logo {
+    display: inline-flex;
+    align-items: center;
+  }
+  .nav-logo img {
+    height: 54px;
+    width: auto;
+    display: block;
+    mix-blend-mode: screen;
+    filter: brightness(1.5) contrast(1.15);
+  }
+  nav.scrolled .nav-logo img {
+    mix-blend-mode: screen;
+  }
+  .nav-links {
+    display: flex;
+    gap: 34px;
+    list-style: none;
+    font-size: 13px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    font-weight: 400;
+  }
+  .nav-right {
+    display: flex;
+    gap: 20px;
+    font-size: 13px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    align-items: center;
+  }
+  .lang-toggle {
+    display: inline-flex;
+    align-items: center;
+    user-select: none;
+    cursor: pointer;
+  }
+  nav .lang-toggle span {
+    opacity: 0.55;
+    transition: opacity 0.25s ease, color 0.25s ease;
+    font-weight: 500;
+    color: var(--paper);
+  }
+  nav .lang-toggle span.active {
+    opacity: 1 !important;
+    color: var(--yellow) !important;
+    font-weight: 700 !important;
+  }
+  nav .lang-toggle .lang-sep {
+    margin: 0 6px;
+    opacity: 0.35 !important;
+    color: var(--paper) !important;
+    font-weight: 400 !important;
+  }
+  .nav-right .cart {
+    background: var(--yellow);
+    color: var(--ink);
+    padding: 10px 18px;
+    font-weight: 500;
+  }
+
+  @media (max-width: 900px) {
+    .nav-links { display: none; }
+    nav { padding: 14px 20px; }
+  }
+
+  /* ==================== HERO ==================== */
+  .hero {
+    position: relative;
+    height: 100vh;
+    min-height: 720px;
+    overflow: hidden;
+    color: var(--paper);
+    background: var(--ink);
+  }
+  .hero video, .hero .hero-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.88;
+  }
+  .hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(20,17,16,0.25) 0%, rgba(20,17,16,0) 35%, rgba(20,17,16,0) 55%, rgba(20,17,16,0.78) 100%);
+  }
+  .hero-overlay {
+    position: absolute;
+    bottom: 72px;
+    left: 48px;
+    right: 48px;
+    z-index: 2;
+    max-width: 1400px;
+  }
+  .hero-overlay .kicker {
+    color: var(--yellow);
+    margin-bottom: 28px;
+  }
+  .hero-overlay h1 {
+    color: var(--paper);
+    font-weight: 300;
+    margin-bottom: 24px;
+  }
+  .hero-overlay h1 em { color: var(--yellow); font-weight: 300; }
+  .hero-overlay p {
+    font-size: 17px;
+    opacity: 0.85;
+    max-width: 42ch;
+    margin-bottom: 40px;
+  }
+  .hero-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 28px;
+    border: 1px solid var(--paper);
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 500;
+    transition: all 0.3s ease;
+  }
+  .hero-cta:hover { background: var(--paper); color: var(--ink); }
+  .hero-meta {
+    position: absolute;
+    top: 120px;
+    right: 48px;
+    z-index: 2;
+    color: var(--paper);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    opacity: 0.75;
+    text-align: right;
+  }
+  .hero-meta .big {
+    font-family: var(--font-display);
+    font-size: 48px;
+    display: block;
+    letter-spacing: -0.02em;
+    text-transform: none;
+    line-height: 1;
+    margin-bottom: 8px;
+    opacity: 1;
+  }
+  .hero-section-num {
+    position: absolute;
+    bottom: 72px;
+    right: 48px;
+    z-index: 2;
+    color: var(--paper);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    opacity: 0.7;
+  }
+
+  @media (max-width: 720px) {
+    .hero { min-height: 100vh; }
+    .hero-overlay { left: 24px; right: 24px; bottom: 48px; }
+    .hero-meta, .hero-section-num { display: none; }
+  }
+
+  /* ==================== MARQUEE BAND ==================== */
+  .marquee-band {
+    background: var(--ink);
+    color: var(--yellow);
+    overflow: hidden;
+    padding: 22px 0;
+    border-top: 1px solid var(--ink-line);
+    border-bottom: 1px solid var(--ink-line);
+  }
+  .marquee-track {
+    display: flex;
+    gap: 60px;
+    white-space: nowrap;
+    font-family: var(--font-display);
+    font-size: clamp(1.4rem, 2.5vw, 2.2rem);
+    font-weight: 300;
+    animation: scroll 40s linear infinite;
+  }
+  .marquee-track span {
+    display: inline-flex;
+    align-items: center;
+    gap: 60px;
+  }
+  .marquee-track span::after {
+    content: "✦";
+    color: var(--yellow-deep);
+    font-size: 0.7em;
+  }
+  @keyframes scroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* ==================== SECTION DEFAULTS ==================== */
+  section { position: relative; }
+
+  .sec-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: clamp(5rem, 10vw, 9rem) 48px;
+  }
+
+  .grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(2rem, 5vw, 6rem);
+    align-items: center;
+  }
+  @media (max-width: 820px) { .grid-2 { grid-template-columns: 1fr; } }
+
+  .grid-4 {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2px;
+  }
+  @media (max-width: 900px) { .grid-4 { grid-template-columns: repeat(2, 1fr); } }
+
+  /* ==================== HERITAGE ==================== */
+  .heritage {
+    background: var(--paper);
+    color: var(--ink);
+  }
+  .heritage-img {
+    aspect-ratio: 4/5;
+    object-fit: cover;
+    width: 100%;
+  }
+  .heritage h2 { margin: 24px 0 28px; }
+  .heritage p { margin-bottom: 20px; font-size: 17px; }
+  .heritage p:last-of-type {
+    font-family: var(--font-italic);
+    font-size: 22px;
+    color: var(--ink-soft);
+    margin-top: 32px;
+  }
+
+  /* ==================== ORIGIN FULL-BLEED ==================== */
+  .origin-hero {
+    position: relative;
+    background: var(--ink);
+    color: var(--paper);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+  }
+  .origin-hero-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.55;
+  }
+  .origin-hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, rgba(20,17,16,0.85) 0%, rgba(20,17,16,0.4) 50%, rgba(20,17,16,0.15) 100%);
+  }
+  .origin-hero-content {
+    position: relative;
+    z-index: 2;
+    padding: 0 48px;
+    max-width: 1400px;
+    margin: 0 auto;
+    width: 100%;
+  }
+  .origin-hero-content .kicker { color: var(--yellow); }
+  .origin-hero h2 {
+    color: var(--paper);
+    margin: 32px 0 36px;
+    max-width: 14ch;
+  }
+  .origin-hero h2 em { color: var(--yellow); }
+  .origin-hero p {
+    max-width: 46ch;
+    font-size: 18px;
+    opacity: 0.85;
+    margin-bottom: 24px;
+  }
+  .origin-tag {
+    display: inline-block;
+    margin-top: 32px;
+    padding: 10px 18px;
+    border: 1px solid var(--yellow);
+    color: var(--yellow);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+
+  /* ==================== ORIGINS GRID ==================== */
+  .origins {
+    background: var(--ink);
+    color: var(--paper);
+    padding-bottom: 0;
+  }
+  .origins-header {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 48px clamp(3rem, 6vw, 5rem);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    gap: 2rem;
+  }
+  .origins-header h3 {
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 300;
+  }
+  .origins-header .num {
+    font-family: var(--font-display);
+    font-size: 15px;
+    letter-spacing: 0.15em;
+    opacity: 0.6;
+  }
+
+  .origin-card {
+    aspect-ratio: 3/4;
+    position: relative;
+    overflow: hidden;
+    color: var(--paper);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 32px 28px;
+    cursor: pointer;
+    transition: transform 0.5s ease;
+  }
+  .origin-card:hover { transform: translateY(-6px); }
+  .origin-card.has-img::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: var(--bg);
+    background-size: cover;
+    background-position: center;
+    z-index: 0;
+    transition: transform 0.8s ease;
+  }
+  .origin-card.has-img:hover::before { transform: scale(1.04); }
+  .origin-card.has-img::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(20,17,16,0.2), rgba(20,17,16,0.85));
+    z-index: 1;
+  }
+  .origin-card > * { position: relative; z-index: 2; }
+  .origin-card.colombia { background: var(--colombia); }
+  .origin-card.etiopia { background: var(--etiopia); }
+  .origin-card.kenia { background: var(--kenia); }
+  .origin-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    opacity: 0.85;
+  }
+  .origin-hex {
+    width: 56px;
+    height: 64px;
+    background: var(--paper);
+    color: var(--ink);
+    clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-display);
+    font-size: 11px;
+    text-align: center;
+    letter-spacing: 0.05em;
+    font-weight: 500;
+    line-height: 1.05;
+    padding: 0 6px;
+  }
+  .origin-name {
+    font-family: var(--font-display);
+    font-size: clamp(1.6rem, 2.5vw, 2.6rem);
+    font-weight: 300;
+    letter-spacing: -0.02em;
+    line-height: 1;
+  }
+  .origin-notes {
+    font-family: var(--font-italic);
+    font-size: 18px;
+    opacity: 0.9;
+    margin-top: 12px;
+  }
+  .origin-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-top: 28px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(244,238,225,0.3);
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+  .origin-meta .arrow {
+    font-family: var(--font-display);
+    font-size: 20px;
+    letter-spacing: 0;
+  }
+
+  /* ==================== ROAST ==================== */
+  .roast {
+    position: relative;
+    background: var(--ink);
+    color: var(--paper);
+    min-height: 90vh;
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+  }
+  @media (max-width: 900px) { .roast { grid-template-columns: 1fr; min-height: auto; } }
+  .roast-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    min-height: 480px;
+  }
+  .roast-text {
+    padding: clamp(4rem, 8vw, 7rem) clamp(2rem, 5vw, 5rem);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: var(--ink-soft);
+  }
+  .roast-text .kicker { color: var(--yellow); }
+  .roast-text h2 { margin: 28px 0 32px; }
+  .roast-text h2 em { color: var(--yellow); }
+  .roast-text p { opacity: 0.85; margin-bottom: 20px; }
+  .roast-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+    margin-top: 48px;
+    padding-top: 36px;
+    border-top: 1px solid var(--ink-line);
+  }
+  .roast-stat .num {
+    font-family: var(--font-display);
+    font-size: clamp(1.8rem, 3vw, 2.6rem);
+    font-weight: 300;
+    color: var(--yellow);
+    line-height: 1;
+    display: block;
+    margin-bottom: 8px;
+  }
+  .roast-stat .label {
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    opacity: 0.7;
+  }
+
+  /* ==================== RITUAL ==================== */
+  .ritual {
+    background: var(--paper);
+    color: var(--ink);
+  }
+  .ritual .grid-2 { align-items: stretch; }
+  .ritual-img {
+    aspect-ratio: 4/5;
+    object-fit: cover;
+    width: 100%;
+  }
+  .ritual-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .ritual h2 { margin: 28px 0 32px; }
+  .ritual h2 em { color: var(--yellow-deep); }
+  .ritual-methods {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin: 32px 0 40px;
+  }
+  .ritual-methods span {
+    padding: 10px 18px;
+    background: var(--ink);
+    color: var(--paper);
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  .link-arrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    font-family: var(--font-display);
+    font-size: 20px;
+    color: var(--ink);
+    border-bottom: 1px solid var(--ink);
+    padding-bottom: 4px;
+    transition: gap 0.3s ease;
+  }
+  .link-arrow:hover { gap: 20px; }
+
+  /* ==================== BREAKFAST ==================== */
+  .breakfast {
+    background: var(--ink-soft);
+    color: var(--paper);
+  }
+  .breakfast-img {
+    aspect-ratio: 5/4;
+    object-fit: cover;
+    width: 100%;
+  }
+  .breakfast h2 em { color: var(--yellow); }
+  .breakfast h2 { margin: 28px 0 32px; }
+  .breakfast p { opacity: 0.85; margin-bottom: 24px; }
+  .breakfast .link-arrow { color: var(--yellow); border-color: var(--yellow); }
+
+  /* ==================== VISIT ==================== */
+  .visit {
+    background: var(--paper);
+    padding: clamp(5rem, 10vw, 9rem) 0;
+  }
+  .visit-header {
+    max-width: 1400px;
+    margin: 0 auto clamp(3rem, 5vw, 4rem);
+    padding: 0 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+  .visit-header h2 { max-width: 14ch; }
+  .visit-header .info {
+    font-family: var(--font-display);
+    font-size: clamp(1.2rem, 1.8vw, 1.6rem);
+    font-weight: 300;
+    text-align: right;
+    line-height: 1.3;
+  }
+  .visit-header .info strong { display: block; font-weight: 400; }
+  .visit-grid {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: 0;
+  }
+  .visit-grid img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    aspect-ratio: 4/5;
+  }
+  @media (max-width: 820px) {
+    .visit-grid { grid-template-columns: 1fr; }
+    .visit-header { flex-direction: column; align-items: flex-start; }
+    .visit-header .info { text-align: left; }
+  }
+
+  /* ==================== SHOP ==================== */
+  .shop {
+    background: var(--ink);
+    color: var(--paper);
+  }
+  .shop-header {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: clamp(5rem, 10vw, 9rem) 48px clamp(3rem, 6vw, 5rem);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    gap: 2rem;
+  }
+  .shop-header h2 { color: var(--paper); }
+  .shop-header .all-link {
+    font-family: var(--font-display);
+    font-size: 18px;
+    color: var(--yellow);
+    border-bottom: 1px solid var(--yellow);
+    padding-bottom: 4px;
+  }
+  .shop-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2px;
+  }
+  @media (max-width: 900px) { .shop-grid { grid-template-columns: repeat(2, 1fr); } }
+  .shop-card {
+    background: var(--ink-soft);
+    aspect-ratio: 3/4;
+    position: relative;
+    overflow: hidden;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: background 0.4s ease;
+  }
+  .shop-card:hover { background: #332a24; }
+  .shop-card img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+  }
+  .shop-card:hover img { transform: scale(1.04); }
+  .shop-card .shop-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(20,17,16,0.1) 0%, rgba(20,17,16,0) 40%, rgba(20,17,16,0.85) 100%);
+  }
+  .shop-card .shop-tag {
+    position: relative;
+    z-index: 2;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--yellow);
+    align-self: flex-start;
+    font-weight: 500;
+  }
+  .shop-card .shop-info {
+    position: relative;
+    z-index: 2;
+  }
+  .shop-card .shop-name {
+    font-family: var(--font-display);
+    font-size: clamp(1.3rem, 2vw, 1.8rem);
+    font-weight: 350;
+    line-height: 1.05;
+    color: var(--paper);
+    margin-bottom: 8px;
+    letter-spacing: -0.01em;
+  }
+  .shop-card .shop-price {
+    font-size: 14px;
+    opacity: 0.75;
+    letter-spacing: 0.04em;
+  }
+
+  /* ==================== SUBSCRIPTION ==================== */
+  .subscription {
+    position: relative;
+    min-height: 80vh;
+    background: var(--ink);
+    color: var(--paper);
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+  }
+  .subscription-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.35;
+  }
+  .subscription::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, rgba(20,17,16,0.9), rgba(20,17,16,0.3));
+  }
+  .subscription-content {
+    position: relative;
+    z-index: 2;
+    padding: clamp(4rem, 8vw, 7rem) 48px;
+    max-width: 1400px;
+    margin: 0 auto;
+    width: 100%;
+  }
+  .subscription .kicker { color: var(--yellow); }
+  .subscription h2 {
+    max-width: 14ch;
+    margin: 28px 0 32px;
+  }
+  .subscription h2 em { color: var(--yellow); }
+  .subscription p {
+    opacity: 0.85;
+    max-width: 40ch;
+    margin-bottom: 40px;
+    font-size: 18px;
+  }
+  .btn-yellow {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    padding: 16px 32px;
+    background: var(--yellow);
+    color: var(--ink);
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-weight: 600;
+    transition: background 0.3s ease;
+  }
+  .btn-yellow:hover { background: var(--paper); }
+
+  /* ==================== FOOTER ==================== */
+  footer {
+    background: var(--ink);
+    color: var(--paper);
+    position: relative;
+    overflow: hidden;
+    padding-top: clamp(5rem, 9vw, 8rem);
+  }
+  .foot-top {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 48px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1.4fr;
+    gap: clamp(2rem, 4vw, 5rem);
+    align-items: flex-start;
+    position: relative;
+    z-index: 2;
+  }
+  @media (max-width: 900px) {
+    .foot-top { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 560px) {
+    .foot-top { grid-template-columns: 1fr; }
+  }
+  .foot-col h4 {
+    font-family: var(--font-body);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-bottom: 22px;
+    color: var(--yellow);
+  }
+  .foot-col ul {
+    list-style: none;
+  }
+  .foot-col li {
+    margin-bottom: 12px;
+    font-size: 15px;
+    opacity: 0.78;
+  }
+  .foot-col a { transition: color 0.2s ease, opacity 0.2s ease; }
+  .foot-col a:hover { opacity: 1; color: var(--yellow); }
+  .foot-col p { font-size: 15px; opacity: 0.78; margin-bottom: 14px; line-height: 1.5; }
+  .newsletter form {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid rgba(244,238,225,0.35);
+    padding-bottom: 4px;
+    margin-top: 6px;
+  }
+  .newsletter input {
+    flex: 1;
+    background: none;
+    border: none;
+    padding: 12px 0;
+    color: var(--paper);
+    font-family: var(--font-body);
+    font-size: 15px;
+    outline: none;
+  }
+  .newsletter input::placeholder { color: rgba(244,238,225,0.5); }
+  .newsletter button {
+    background: none;
+    color: var(--paper);
+    border: none;
+    font-family: var(--font-body);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 0 0 0 20px;
+    transition: color 0.2s ease;
+  }
+  .newsletter button:hover { color: var(--yellow); }
+  .newsletter .fine {
+    font-size: 11px;
+    opacity: 0.5;
+    margin-top: 14px;
+    letter-spacing: 0.03em;
+  }
+  .socials {
+    display: flex;
+    gap: 28px;
+    margin-top: 28px;
+  }
+  .socials a {
+    font-family: var(--font-body);
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-weight: 500;
+    opacity: 0.75;
+    transition: all 0.25s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .socials a::before {
+    content: "";
+    width: 6px;
+    height: 6px;
+    background: var(--yellow);
+    border-radius: 50%;
+    display: inline-block;
+  }
+  .socials a:hover { opacity: 1; color: var(--yellow); }
+
+  /* Brand wordmark backdrop */
+  .foot-wordmark {
+    position: relative;
+    margin-top: clamp(4rem, 8vw, 7rem);
+    overflow: hidden;
+    padding: 0 24px;
+    line-height: 0.82;
+  }
+  .foot-wordmark-text {
+    font-family: var(--font-display);
+    font-weight: 300;
+    font-variation-settings: "opsz" 144, "SOFT" 50;
+    font-size: clamp(7rem, 24vw, 24rem);
+    letter-spacing: -0.035em;
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(244,238,225,0.22);
+    white-space: nowrap;
+    text-align: center;
+    line-height: 0.82;
+    display: block;
+    transform: translateY(15%);
+    user-select: none;
+  }
+  .foot-wordmark-text em {
+    font-family: var(--font-italic);
+    font-style: italic;
+    font-weight: 400;
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(233,185,60,0.4);
+    padding: 0 0.05em;
+  }
+
+  .foot-bottom {
+    border-top: 1px solid var(--ink-line);
+    padding: 22px 48px;
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    opacity: 0.55;
+    flex-wrap: wrap;
+    gap: 12px;
+    position: relative;
+    z-index: 2;
+  }
+  .foot-bottom a { transition: opacity 0.2s ease; }
+  .foot-bottom a:hover { opacity: 1; color: var(--yellow); }
+
+  /* ==================== BEAN STRIP ==================== */
+  .bean-strip {
+    background: var(--ink);
+    overflow: hidden;
+    padding: 40px 0;
+    position: relative;
+    border-top: 1px solid var(--ink-line);
+    border-bottom: 1px solid var(--ink-line);
+  }
+  .bean-strip.light {
+    background: var(--paper);
+    border-color: var(--paper-line);
+  }
+  .bean-strip-track {
+    display: flex;
+    gap: 80px;
+    align-items: center;
+    white-space: nowrap;
+    width: max-content;
+    animation: bean-strip-scroll 40s linear infinite;
+    will-change: transform;
+  }
+  .bean-strip.reverse .bean-strip-track {
+    animation-direction: reverse;
+  }
+  .bean-icon {
+    width: 40px;
+    height: 54px;
+    flex-shrink: 0;
+    color: var(--yellow);
+    opacity: 0.55;
+    animation: bean-spin 9s linear infinite;
+    will-change: transform;
+  }
+  .bean-strip.light .bean-icon { color: var(--ink); }
+  .bean-icon:nth-child(2n) {
+    animation-duration: 13s;
+    animation-direction: reverse;
+    opacity: 0.35;
+    width: 32px;
+    height: 44px;
+  }
+  .bean-icon:nth-child(3n) {
+    animation-duration: 7s;
+    opacity: 0.8;
+    color: var(--paper);
+    width: 48px;
+    height: 64px;
+  }
+  .bean-strip.light .bean-icon:nth-child(3n) { color: var(--ink-soft); opacity: 0.9; }
+  .bean-icon:nth-child(5n) {
+    animation-duration: 16s;
+    opacity: 0.25;
+    width: 26px;
+    height: 36px;
+  }
+  @keyframes bean-strip-scroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+  @keyframes bean-spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  /* ==================== COMPARE BADGE ==================== */
+  .compare-badge {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    z-index: 90;
+    background: var(--yellow);
+    color: var(--ink);
+    padding: 14px 20px;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    font-weight: 600;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.25);
+    transition: transform 0.3s ease;
+  }
+  .compare-badge:hover { transform: translateY(-3px); }
+  .compare-badge span { opacity: 0.6; margin-right: 8px; }
+
+  /* ==================== FADE-UP ANIMATION ==================== */
+  [data-fade] {
+    opacity: 0;
+    transform: translateY(32px);
+    transition: opacity 0.9s cubic-bezier(.2,.7,.2,1), transform 0.9s cubic-bezier(.2,.7,.2,1);
+  }
+  [data-fade].visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<nav id="nav">
+  <a href="#" class="nav-logo"><img src="assets/logo-hexagon.png" alt="Fanático · Cafés La Mexicana · desde 1890"></a>
+  <ul class="nav-links">
+    <li><a href="#heritage">Historia</a></li>
+    <li><a href="#shop">Tienda</a></li>
+    <li><a href="#roast">Tueste</a></li>
+    <li><a href="#visit">Visítanos</a></li>
+    <li><a href="#subscription">Suscripción</a></li>
+  </ul>
+  <div class="nav-right">
+    <a href="#" class="lang-toggle" onclick="toggleLang(event)" aria-label="Cambiar idioma">
+      <span class="lang-es active">ES</span><span class="lang-sep">/</span><span class="lang-en">EN</span>
+    </a>
+    <a class="cart">Cesta · 0</a>
+  </div>
+</nav>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <video autoplay muted loop playsinline poster="assets/papua-bag-dark.png">
+    <source src="assets/brewing-loop.mp4" type="video/mp4">
+  </video>
+  <div class="hero-overlay">
+    <h1>Fanáticos<br>del café.</h1>
+    <p>Tostamos cada mañana en Chamberí, como siempre lo hemos hecho.</p>
+    <a href="#shop" class="hero-cta">Descubre la tienda  →</a>
+  </div>
+  <div class="hero-section-num">Scroll ↓</div>
+</section>
+
+<!-- ============ MARQUEE ============ -->
+<div class="marquee-band">
+  <div class="marquee-track">
+    <span>Cafés La Mexicana</span>
+    <span>Tostado en Chamberí</span>
+    <span>Arábica 100%</span>
+    <span>Desde 1890</span>
+    <span>Especialidad</span>
+    <span>Cafés La Mexicana</span>
+    <span>Tostado en Chamberí</span>
+    <span>Arábica 100%</span>
+    <span>Desde 1890</span>
+    <span>Especialidad</span>
+  </div>
+</div>
+
+<!-- ============ HERITAGE ============ -->
+<section class="heritage" id="heritage">
+  <div class="sec-inner">
+    <div class="grid-2">
+      <img src="assets/hexagon-desde-1890.png" class="heritage-img" alt="Sello Fanático desde 1890">
+      <div data-fade>
+        <h2>Cuatro generaciones escuchando el grano.</h2>
+        <p>Desde 1890, Cafés La Mexicana es el taller donde una familia aprende a tostar. Fanático es su última conversación: un café de especialidad en el corazón de Chamberí donde cada mañana, antes de abrir, sale el primer lote del día.</p>
+        <p>Aquí no servimos café. Lo tostamos.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SHOP ============ -->
+<section class="shop" id="shop">
+  <div class="shop-header" data-fade>
+    <h2>Llévate Fanático<br>a casa.</h2>
+    <a class="all-link">Ver toda la tienda →</a>
+  </div>
+  <div class="shop-grid">
+
+    <a class="shop-card">
+      <img src="assets/papua-bag-dark.png" alt="Papúa Eastern Highlands 250g">
+      <div class="shop-overlay"></div>
+      <span class="shop-tag">Origen · Papúa</span>
+      <div class="shop-info">
+        <div class="shop-name">Papúa Eastern<br>Highlands</div>
+        <div class="shop-price">250 g · desde 12,50 €</div>
+      </div>
+    </a>
+
+    <a class="shop-card">
+      <img src="assets/navidad-bag.png" alt="Café de Navidad">
+      <div class="shop-overlay"></div>
+      <span class="shop-tag">Edición · Limitada</span>
+      <div class="shop-info">
+        <div class="shop-name">Café de Navidad</div>
+        <div class="shop-price">250 g · 14,00 €</div>
+      </div>
+    </a>
+
+    <a class="shop-card">
+      <img src="assets/indonesia-bag.png" alt="Indonesia Java wib Jampit" style="filter: brightness(0.75) contrast(1.05);">
+      <div class="shop-overlay"></div>
+      <span class="shop-tag">Origen · Indonesia</span>
+      <div class="shop-info">
+        <div class="shop-name">Java wib Jampit</div>
+        <div class="shop-price">250 g · desde 11,80 €</div>
+      </div>
+    </a>
+
+    <a class="shop-card" style="background: #2a241f;">
+      <img src="assets/espresso-machine.png" alt="Suscripción mensual">
+      <div class="shop-overlay"></div>
+      <span class="shop-tag">Suscripción · Mensual</span>
+      <div class="shop-info">
+        <div class="shop-name">Café fresco,<br>cada mes.</div>
+        <div class="shop-price">Desde 9,90 €/mes</div>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+<!-- Bean strip divider -->
+<div class="bean-strip" data-beans="18" aria-hidden="true"><div class="bean-strip-track"></div></div>
+
+<!-- ============ ROAST ============ -->
+<section class="roast" id="roast">
+  <img src="assets/roaster-close.png" class="roast-img" alt="Tostadora Fanático">
+  <div class="roast-text" data-fade>
+    <h2>Cada mañana,<br>antes del café,<br>el humo.</h2>
+    <p>Tostamos en lotes pequeños sobre nuestra propia máquina. El resultado: café recién salido del tambor, sin excepción, sin atajos.</p>
+    <p>Nada de stocks. Nada de reventa. Lo que bebes hoy se tostó esta semana.</p>
+    <div class="roast-stats">
+      <div class="roast-stat">
+        <span class="num">07:30</span>
+        <span class="label">Primer lote del día</span>
+      </div>
+      <div class="roast-stat">
+        <span class="num">5 kg</span>
+        <span class="label">Capacidad por batch</span>
+      </div>
+      <div class="roast-stat">
+        <span class="num">6 días</span>
+        <span class="label">Tueste a taza</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Bean strip divider (reverse) -->
+<div class="bean-strip reverse" data-beans="18" aria-hidden="true"><div class="bean-strip-track"></div></div>
+
+<!-- ============ BREW ============ -->
+<section class="ritual" id="ritual">
+  <div class="sec-inner">
+    <div class="grid-2">
+      <div class="ritual-text" data-fade>
+        <h2>V60, AeroPress, espresso.</h2>
+        <p>Cinco formas de extraer lo que hay dentro del grano. Ven a verlo en barra o aprende a hacerlo en casa.</p>
+        <div class="ritual-methods">
+          <span>V60</span>
+          <span>AeroPress</span>
+          <span>Espresso</span>
+          <span>Chemex</span>
+          <span>Cold Brew</span>
+        </div>
+        <a class="link-arrow">Guías de extracción →</a>
+      </div>
+      <img src="assets/pour-over-dark.png" class="ritual-img" alt="Pour-over Fanático">
+    </div>
+  </div>
+</section>
+
+<!-- ============ BREAKFAST ============ -->
+<section class="breakfast">
+  <div class="sec-inner">
+    <div class="grid-2">
+      <img src="assets/breakfast-wide.png" class="breakfast-img" alt="Desayunos Fanáticos">
+      <div data-fade>
+        <h2>No solo café.</h2>
+        <p>Bollería recién horneada, tostadas con buen pan, zumo recién exprimido. De 7:45 a 16h, de lunes a viernes.</p>
+        <p>El desayuno que toma un fanático del café.</p>
+        <a class="link-arrow">Ver carta →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Bean strip divider (light) -->
+<div class="bean-strip light" data-beans="18" aria-hidden="true"><div class="bean-strip-track"></div></div>
+
+<!-- ============ VISIT ============ -->
+<section class="visit" id="visit">
+  <div class="visit-header" data-fade>
+    <div>
+      <h2 style="font-size: clamp(1.8rem, 3.8vw, 3.2rem);">Alfonso Gómez, 15.</h2>
+    </div>
+    <div class="info">
+      <strong>Chamberí · Madrid</strong>
+      Lunes a viernes<br>
+      7:45 a 16:00<br>
+      <a href="https://maps.google.com/?q=Alfonso+G%C3%B3mez+15+Madrid" target="_blank" rel="noopener noreferrer" style="color: var(--yellow-deep); border-bottom: 1px solid var(--yellow-deep); font-size: 14px; letter-spacing: 0.1em; text-transform: uppercase; font-family: var(--font-body); font-weight: 500;">Cómo llegar →</a>
+    </div>
+  </div>
+  <div class="visit-grid">
+    <img src="assets/storefront.png" alt="Fanático Café, Alfonso Gómez 15">
+    <img src="assets/interior-wide.png" alt="Interior Fanático Café">
+  </div>
+</section>
+
+<!-- ============ SUBSCRIPTION ============ -->
+<section class="subscription" id="subscription">
+  <img src="assets/barista-counter.png" class="subscription-bg" alt="Barista Fanático">
+  <div class="subscription-content" data-fade>
+    <h2>Café recién tostado,<br>cada mes.</h2>
+    <p>Elige los gramos, los orígenes y los días. Nosotros tostamos la mañana en que te llega.</p>
+    <a class="btn-yellow">Personaliza tu suscripción →</a>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="foot-top">
+    <div class="foot-col">
+      <h4>La casa</h4>
+      <ul>
+        <li><a href="#heritage">Nuestra historia</a></li>
+        <li><a href="#roast">Tueste</a></li>
+        <li><a href="#ritual">Brew guides</a></li>
+        <li><a href="#visit">Visítanos</a></li>
+      </ul>
+    </div>
+    <div class="foot-col">
+      <h4>Tienda</h4>
+      <ul>
+        <li><a href="#shop">Cafés</a></li>
+        <li><a>Equipamiento</a></li>
+        <li><a href="#subscription">Suscripción</a></li>
+        <li><a>Tarjeta regalo</a></li>
+      </ul>
+    </div>
+    <div class="foot-col">
+      <h4>Visítanos</h4>
+      <ul>
+        <li>Alfonso Gómez, 15</li>
+        <li>Chamberí · 28028 Madrid</li>
+        <li>L a V · 7:45 a 16:00</li>
+        <li style="margin-top: 16px;"><a href="https://maps.google.com/?q=Alfonso+G%C3%B3mez+15+Madrid" target="_blank" rel="noopener noreferrer" style="color: var(--yellow); border-bottom: 1px solid var(--yellow); padding-bottom: 2px;">Cómo llegar →</a></li>
+      </ul>
+    </div>
+    <div class="foot-col newsletter">
+      <h4>Newsletter</h4>
+      <p>Un correo al mes. Nuevos orígenes, ediciones limitadas, invitaciones a catas.</p>
+      <form onsubmit="return false;">
+        <input type="email" placeholder="tu@email.com" required>
+        <button>Suscribirme →</button>
+      </form>
+      <p class="fine">* Al suscribirte aceptas nuestra <a style="text-decoration: underline;">Política de Privacidad</a>.</p>
+      <div class="socials">
+        <a aria-label="Instagram">Instagram</a>
+        <a aria-label="YouTube">YouTube</a>
+        <a aria-label="Email">hola@fanaticocafe.com</a>
+      </div>
+    </div>
+  </div>
+  <div class="foot-wordmark" aria-hidden="true">
+    <span class="foot-wordmark-text">Fanático.</span>
+  </div>
+  <div class="foot-bottom">
+    <span>© 2026 Fanático · Cafés La Mexicana, desde 1890</span>
+    <span><a>Aviso legal</a> · <a>Privacidad</a> · <a>Cookies</a></span>
+  </div>
+</footer>
+
+<!-- ============ COMPARE BADGE ============ -->
+<a href="https://fanaticocafe.com" target="_blank" class="compare-badge">
+  <span>Antes:</span>ver versión actual →
+</a>
+
+<script>
+  // Nav scroll
+  const nav = document.getElementById('nav');
+  const heroH = window.innerHeight * 0.9;
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > heroH) nav.classList.add('scrolled');
+    else nav.classList.remove('scrolled');
+  });
+
+  // Fade-in on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
+  document.querySelectorAll('[data-fade]').forEach(el => observer.observe(el));
+
+  // Language toggle
+  function toggleLang(e) {
+    e.preventDefault();
+    document.querySelector('.lang-es').classList.toggle('active');
+    document.querySelector('.lang-en').classList.toggle('active');
+  }
+
+  // Populate bean strips
+  const beanSVG = `<svg class="bean-icon" viewBox="0 0 60 80" xmlns="http://www.w3.org/2000/svg"><ellipse cx="30" cy="40" rx="22" ry="34" fill="currentColor"/><path d="M30 8 Q 36 40 30 72" stroke="rgba(20,17,16,0.55)" stroke-width="3.5" fill="none" stroke-linecap="round"/></svg>`;
+  document.querySelectorAll('.bean-strip').forEach(strip => {
+    const count = parseInt(strip.dataset.beans) || 18;
+    const track = strip.querySelector('.bean-strip-track');
+    track.innerHTML = beanSVG.repeat(count * 2);
+  });
+
+</script>
+
+</body>
+</html>
