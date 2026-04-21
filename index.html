@@ -1052,15 +1052,185 @@
   .compare-badge:hover { transform: translateY(-3px); }
   .compare-badge span { opacity: 0.6; margin-right: 8px; }
 
-  /* ==================== FADE-UP ANIMATION ==================== */
-  [data-fade] {
+  /* ==================== ANIMATIONS ==================== */
+  [data-fade], [data-scale], [data-slide-l], [data-slide-r], [data-slide-up], [data-rotate-in] {
     opacity: 0;
-    transform: translateY(32px);
-    transition: opacity 0.9s cubic-bezier(.2,.7,.2,1), transform 0.9s cubic-bezier(.2,.7,.2,1);
+    transition: opacity 1s cubic-bezier(.2,.7,.2,1), transform 1.15s cubic-bezier(.2,.7,.2,1);
+    will-change: transform, opacity;
   }
-  [data-fade].visible {
+  [data-fade] { transform: translateY(36px); }
+  [data-scale] { transform: scale(0.94); }
+  [data-slide-l] { transform: translateX(-60px); }
+  [data-slide-r] { transform: translateX(60px); }
+  [data-slide-up] { transform: translateY(80px); }
+  [data-rotate-in] { transform: rotate(-4deg) scale(0.92); transform-origin: center; }
+  [data-mask] {
+    opacity: 1;
+    clip-path: inset(0 100% 0 0);
+    transition: clip-path 1.4s cubic-bezier(.65,0,.35,1);
+    will-change: clip-path;
+  }
+  [data-fade].visible,
+  [data-scale].visible,
+  [data-slide-l].visible,
+  [data-slide-r].visible,
+  [data-slide-up].visible,
+  [data-rotate-in].visible {
+    opacity: 1;
+    transform: translate(0, 0) scale(1) rotate(0);
+  }
+  [data-mask].visible { clip-path: inset(0 0 0 0); }
+
+  /* Staggered children */
+  [data-stagger] > * {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.8s cubic-bezier(.2,.7,.2,1), transform 0.9s cubic-bezier(.2,.7,.2,1);
+  }
+  [data-stagger].visible > * {
     opacity: 1;
     transform: translateY(0);
+  }
+  [data-stagger].visible > *:nth-child(1) { transition-delay: 0s; }
+  [data-stagger].visible > *:nth-child(2) { transition-delay: 0.08s; }
+  [data-stagger].visible > *:nth-child(3) { transition-delay: 0.16s; }
+  [data-stagger].visible > *:nth-child(4) { transition-delay: 0.24s; }
+  [data-stagger].visible > *:nth-child(5) { transition-delay: 0.32s; }
+  [data-stagger].visible > *:nth-child(6) { transition-delay: 0.40s; }
+  [data-stagger].visible > *:nth-child(7) { transition-delay: 0.48s; }
+  [data-stagger].visible > *:nth-child(8) { transition-delay: 0.56s; }
+
+  /* Hero intro (on load, after video fades in) */
+  .hero-overlay > * {
+    opacity: 0;
+    transform: translateY(32px);
+    animation: heroIntro 1.1s cubic-bezier(.2,.7,.2,1) forwards;
+  }
+  .hero-overlay > *:nth-child(1) { animation-delay: 0.4s; }
+  .hero-overlay > *:nth-child(2) { animation-delay: 0.7s; }
+  .hero-overlay > *:nth-child(3) { animation-delay: 0.95s; }
+  @keyframes heroIntro {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Hero image transition */
+  .hero video, .hero .hero-img {
+    transition: opacity 0.6s ease, transform 0.1s linear;
+  }
+
+  /* Image hover micro-zoom */
+  .heritage-img, .ritual-img, .breakfast-img, .roast-img {
+    transition: transform 1s cubic-bezier(.2,.7,.2,1), opacity 0.6s ease;
+  }
+  .heritage:hover .heritage-img,
+  .ritual:hover .ritual-img,
+  .breakfast:hover .breakfast-img,
+  .roast:hover .roast-img {
+    transform: scale(1.02);
+  }
+  .visit-grid img {
+    transition: transform 1.2s cubic-bezier(.2,.7,.2,1);
+  }
+  .visit-grid:hover img {
+    transform: scale(1.03);
+  }
+
+  /* Shop card already has transitions; add entrance stagger */
+  .shop-grid.visible .shop-card {
+    animation: cardIn 0.9s cubic-bezier(.2,.7,.2,1) both;
+  }
+  .shop-grid.visible .shop-card:nth-child(1) { animation-delay: 0s; }
+  .shop-grid.visible .shop-card:nth-child(2) { animation-delay: 0.12s; }
+  .shop-grid.visible .shop-card:nth-child(3) { animation-delay: 0.24s; }
+  .shop-grid.visible .shop-card:nth-child(4) { animation-delay: 0.36s; }
+  .shop-grid .shop-card {
+    opacity: 0;
+    transform: translateY(40px) scale(0.97);
+  }
+  @keyframes cardIn {
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  /* Roast stats staggered count-up */
+  .roast-stats.visible .roast-stat {
+    animation: statIn 0.8s cubic-bezier(.2,.7,.2,1) both;
+  }
+  .roast-stats.visible .roast-stat:nth-child(1) { animation-delay: 0s; }
+  .roast-stats.visible .roast-stat:nth-child(2) { animation-delay: 0.15s; }
+  .roast-stats.visible .roast-stat:nth-child(3) { animation-delay: 0.30s; }
+  .roast-stats .roast-stat {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  @keyframes statIn {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Ritual method pills */
+  .ritual-methods.visible span {
+    animation: pillIn 0.6s cubic-bezier(.2,.7,.2,1) both;
+  }
+  .ritual-methods.visible span:nth-child(1) { animation-delay: 0.1s; }
+  .ritual-methods.visible span:nth-child(2) { animation-delay: 0.2s; }
+  .ritual-methods.visible span:nth-child(3) { animation-delay: 0.3s; }
+  .ritual-methods.visible span:nth-child(4) { animation-delay: 0.4s; }
+  .ritual-methods.visible span:nth-child(5) { animation-delay: 0.5s; }
+  .ritual-methods span {
+    opacity: 0;
+    transform: translateY(16px) scale(0.85);
+  }
+  @keyframes pillIn {
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  /* Footer columns stagger */
+  .foot-top.visible .foot-col {
+    animation: colIn 0.8s cubic-bezier(.2,.7,.2,1) both;
+  }
+  .foot-top.visible .foot-col:nth-child(1) { animation-delay: 0s; }
+  .foot-top.visible .foot-col:nth-child(2) { animation-delay: 0.1s; }
+  .foot-top.visible .foot-col:nth-child(3) { animation-delay: 0.2s; }
+  .foot-top.visible .foot-col:nth-child(4) { animation-delay: 0.3s; }
+  .foot-top .foot-col {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  @keyframes colIn {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Foot wordmark scale-in */
+  .foot-wordmark.visible .foot-wordmark-text {
+    animation: wordmarkIn 1.6s cubic-bezier(.65,0,.35,1) both;
+  }
+  .foot-wordmark .foot-wordmark-text {
+    opacity: 0;
+    transform: translateY(40%) scale(0.95);
+  }
+  @keyframes wordmarkIn {
+    to { opacity: 1; transform: translateY(15%) scale(1); }
+  }
+
+  /* Link arrow hover */
+  .link-arrow::after {
+    content: "";
+    display: inline-block;
+    width: 0;
+    transition: width 0.3s ease;
+  }
+  .link-arrow:hover::after { width: 8px; }
+
+  /* Marquee pauses on hover */
+  .marquee-band:hover .marquee-track { animation-play-state: paused; }
+  .bean-strip:hover .bean-strip-track { animation-play-state: paused; }
+
+  /* Respect reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
   }
 </style>
 </head>
@@ -1118,8 +1288,8 @@
 <section class="heritage" id="heritage">
   <div class="sec-inner">
     <div class="grid-2">
-      <img src="assets/hexagon-desde-1890.png" class="heritage-img" alt="Sello Fanático desde 1890">
-      <div data-fade>
+      <img src="assets/hexagon-desde-1890.png" class="heritage-img" alt="Sello Fanático desde 1890" data-scale>
+      <div data-slide-r>
         <h2>Cuatro generaciones escuchando el grano.</h2>
         <p>Desde 1890, Cafés La Mexicana es el taller donde una familia aprende a tostar. Fanático es su última conversación: un café de especialidad en el corazón de Chamberí donde cada mañana, antes de abrir, sale el primer lote del día.</p>
         <p>Aquí no servimos café. Lo tostamos.</p>
@@ -1134,7 +1304,7 @@
     <h2>Llévate Fanático<br>a casa.</h2>
     <a class="all-link">Ver toda la tienda →</a>
   </div>
-  <div class="shop-grid">
+  <div class="shop-grid" data-anim>
 
     <a class="shop-card">
       <img src="assets/papua-bag-dark.png" alt="Papúa Eastern Highlands 250g">
@@ -1184,12 +1354,12 @@
 
 <!-- ============ ROAST ============ -->
 <section class="roast" id="roast">
-  <img src="assets/roaster-close.png" class="roast-img" alt="Tostadora Fanático">
-  <div class="roast-text" data-fade>
+  <img src="assets/roaster-close.png" class="roast-img" alt="Tostadora Fanático" data-mask>
+  <div class="roast-text" data-slide-r>
     <h2>Cada mañana,<br>antes del café,<br>el humo.</h2>
     <p>Tostamos en lotes pequeños sobre nuestra propia máquina. El resultado: café recién salido del tambor, sin excepción, sin atajos.</p>
     <p>Nada de stocks. Nada de reventa. Lo que bebes hoy se tostó esta semana.</p>
-    <div class="roast-stats">
+    <div class="roast-stats" data-anim>
       <div class="roast-stat">
         <span class="num">07:30</span>
         <span class="label">Primer lote del día</span>
@@ -1213,10 +1383,10 @@
 <section class="ritual" id="ritual">
   <div class="sec-inner">
     <div class="grid-2">
-      <div class="ritual-text" data-fade>
+      <div class="ritual-text" data-slide-l>
         <h2>V60, AeroPress, espresso.</h2>
         <p>Cinco formas de extraer lo que hay dentro del grano. Ven a verlo en barra o aprende a hacerlo en casa.</p>
-        <div class="ritual-methods">
+        <div class="ritual-methods" data-anim>
           <span>V60</span>
           <span>AeroPress</span>
           <span>Espresso</span>
@@ -1225,7 +1395,7 @@
         </div>
         <a class="link-arrow">Guías de extracción →</a>
       </div>
-      <img src="assets/pour-over-dark.png" class="ritual-img" alt="Pour-over Fanático">
+      <img src="assets/pour-over-dark.png" class="ritual-img" alt="Pour-over Fanático" data-scale>
     </div>
   </div>
 </section>
@@ -1234,8 +1404,8 @@
 <section class="breakfast">
   <div class="sec-inner">
     <div class="grid-2">
-      <img src="assets/breakfast-wide.png" class="breakfast-img" alt="Desayunos Fanáticos">
-      <div data-fade>
+      <img src="assets/breakfast-wide.png" class="breakfast-img" alt="Desayunos Fanáticos" data-slide-l>
+      <div data-slide-r>
         <h2>No solo café.</h2>
         <p>Bollería recién horneada, tostadas con buen pan, zumo recién exprimido. De 7:45 a 16h, de lunes a viernes.</p>
         <p>El desayuno que toma un fanático del café.</p>
@@ -1262,15 +1432,15 @@
     </div>
   </div>
   <div class="visit-grid">
-    <img src="assets/storefront.png" alt="Fanático Café, Alfonso Gómez 15">
-    <img src="assets/interior-wide.png" alt="Interior Fanático Café">
+    <img src="assets/storefront.png" alt="Fanático Café, Alfonso Gómez 15" data-slide-l>
+    <img src="assets/interior-wide.png" alt="Interior Fanático Café" data-slide-r>
   </div>
 </section>
 
 <!-- ============ SUBSCRIPTION ============ -->
 <section class="subscription" id="subscription">
-  <img src="assets/barista-counter.png" class="subscription-bg" alt="Barista Fanático">
-  <div class="subscription-content" data-fade>
+  <img src="assets/barista-counter.png" class="subscription-bg" alt="Barista Fanático" data-scale>
+  <div class="subscription-content" data-slide-up>
     <h2>Café recién tostado,<br>cada mes.</h2>
     <p>Elige los gramos, los orígenes y los días. Nosotros tostamos la mañana en que te llega.</p>
     <a class="btn-yellow">Personaliza tu suscripción →</a>
@@ -1279,7 +1449,7 @@
 
 <!-- ============ FOOTER ============ -->
 <footer>
-  <div class="foot-top">
+  <div class="foot-top" data-anim>
     <div class="foot-col">
       <h4>La casa</h4>
       <ul>
@@ -1322,7 +1492,7 @@
       </div>
     </div>
   </div>
-  <div class="foot-wordmark" aria-hidden="true">
+  <div class="foot-wordmark" data-anim aria-hidden="true">
     <span class="foot-wordmark-text">Fanático.</span>
   </div>
   <div class="foot-bottom">
@@ -1345,7 +1515,7 @@
     else nav.classList.remove('scrolled');
   });
 
-  // Fade-in on scroll
+  // Scroll reveal
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(e => {
       if (e.isIntersecting) {
@@ -1353,8 +1523,24 @@
         observer.unobserve(e.target);
       }
     });
-  }, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
-  document.querySelectorAll('[data-fade]').forEach(el => observer.observe(el));
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  const sel = '[data-fade], [data-scale], [data-slide-l], [data-slide-r], [data-slide-up], [data-rotate-in], [data-mask], [data-stagger], [data-anim]';
+  document.querySelectorAll(sel).forEach(el => observer.observe(el));
+
+  // Hero parallax + zoom on scroll
+  const heroVid = document.getElementById('heroVideo');
+  let rafPending = false;
+  window.addEventListener('scroll', () => {
+    if (rafPending) return;
+    rafPending = true;
+    requestAnimationFrame(() => {
+      const y = window.scrollY;
+      if (heroVid && y < window.innerHeight) {
+        heroVid.style.transform = `translateY(${y * 0.28}px) scale(${1 + y * 0.0004})`;
+      }
+      rafPending = false;
+    });
+  }, { passive: true });
 
   // Language toggle
   function toggleLang(e) {
